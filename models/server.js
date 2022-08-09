@@ -1,16 +1,24 @@
 
 const express = require('express')
 const cors = require('cors');
+const { dbConnection } = require('../database/configDB');
 class Server  {
     constructor(){
         this.app = express();
         this.port = process.env.PORT;
+        //Conectar a la base de datos de mongo Atlas(en la nube)
+        this.connectDB();    
+
         //Middleware
         this.middleware();
         //Rutas de la aplicacion
         this.rutas();
     }
-
+    //Metodo para conectar a DB
+     async connectDB() {
+         await dbConnection();
+         
+    }
     
     middleware(){
         //cors
