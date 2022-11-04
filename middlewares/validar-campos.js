@@ -1,3 +1,5 @@
+
+//Este modulo validar-campos.js contiene esta funcion llamada validarCampos (middlewares) personalizada
 const { validationResult} = require('express-validator');
 
 //Aqui creamos nuestro middleware para validar los campos que van en la peticion del cliente hacia el //servidor

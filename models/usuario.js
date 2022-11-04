@@ -1,6 +1,6 @@
 const { Schema, model} = require('mongoose');
 
-//Definimos el schema de mi coleccion(tabla sql) le damos un nombre en este caso SchemaUser
+//Definimos el schema(diseño) de mi coleccion(tabla sql) le damos un nombre en este caso SchemaUser
 const SchemaUser = Schema ({
     name: {
         type: String,
@@ -34,7 +34,12 @@ const SchemaUser = Schema ({
     }
 
 });
+//En esta parte puedo escribir metodos que sobre escriban los metodos de mongoose.
+//El metodo .toJSON permite borrar __V que es la version y el password
 //https://www.udemy.com/course/node-de-cero-a-experto/learn/lecture/24779006#overview
+//Cuando se manda a llamar toJSON ejecutara la function que quita la version y el password.
+//No usa funcion flecha por que esta no permite usar this, solamente function permite this
+//Y este this se refiere a la instancia de SchemaUser con todos sus objetos
 SchemaUser.methods.toJSON = function(){
     const {__v,password,...usuario}= this.toObject(); //Esto saca del modelo la version y el password y retorna el resto
     return usuario;

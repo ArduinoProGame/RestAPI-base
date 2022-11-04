@@ -1,7 +1,7 @@
 const Role= require('../models/role');
 const Usuario=require('../models/usuario')
 
-const rolValido= async (rol='')=>{
+const esrolValido= async (rol='')=>{
     const rolExist = await Role.findOne({rol});
     if(!rolExist){
             throw new Error(`Este rol ${rol} no esta registrado en la base de datos`)
@@ -25,7 +25,7 @@ const usuarioIdExiste = async (id)=>{
     }
 }
 module.exports= {
-    rolValido,
+    esrolValido,
     emailExiste,
     usuarioIdExiste
 }

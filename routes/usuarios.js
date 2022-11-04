@@ -7,7 +7,7 @@ const {usuariosGet,
     usuariosDelete
 } = require('../controllers/usuarios');
 
-const {rolValido, emailExiste,usuarioIdExiste} = require('../helpers/db-validators');
+const {esrolValido, emailExiste,usuarioIdExiste} = require('../helpers/db-validators');
 const { validarCampos } = require('../middlewares/validar-campos');
 
 const router= Router();
@@ -17,8 +17,8 @@ router.put('/:id',
 [
  check('id','No es un id de Mongo').isMongoId(),
  check('id').custom(usuarioIdExiste),
- check('rol').custom(rolValido),
- validarCampos
+ check('rol').custom(esrolValido),
+ validarCampos //Este midelware personalizado sirve para que de un error si no psas los check anteriores y la app no se guinde
 ], usuariosPut);  //usuariosPut es el controlador(funcion) que sirve a la peticion put
 //Las rutas pueden recibir un parametro entre /(ruta) y el controlador de la ruta. Este es un middleware
 //en este caso es el metodo check del modulo express-validator. Estos middlewares se ejecutan en orden
@@ -29,7 +29,7 @@ router.post('/',[
     check('correo').custom(emailExiste),
     check('password','El password debe tener mas de 6 letras..').isLength({min:6}),
     //check('rol','Este rol no es valido..').isIn(['ADMIN_ROLE','USER_ROLE']),
-    check('rol').custom(rolValido),
+    check('rol').custom(esrolValido), //Clase 124
     validarCampos
 ], usuariosPost); //usuariosPost es el controlador(funcion) que sirve a la peticion post
 //Delete

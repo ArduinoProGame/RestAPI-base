@@ -1,3 +1,5 @@
+//mongoose permite crear modelos de objetos, con esto vamos a conectar mi aplicacion de nodejs con 
+//la base de datos en la nube que es mongo atlas
 const mongoose = require('mongoose');
 
 /* 
@@ -12,7 +14,7 @@ const uri = process.env.MONGO_CLOUD;
 const dbConnection = async ()=> {
     
     await mongoose.connect(uri, {useNewUrlParser:true,useUnifiedTopology: true})
-    .then(()=>console.log("Server connected to dataBase"))
+    .then(()=>console.log("Server connected to mongoDB Atlas(cloud) dataBase: user_node_cafe"))
     .catch(e=>console.log(e));
 
 }
